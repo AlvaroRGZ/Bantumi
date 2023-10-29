@@ -1,12 +1,8 @@
 package es.upm.miw.bantumi;
 
-import android.content.Context;
 import android.util.Log;
 
-import java.io.FileOutputStream;
-import java.util.List;
-
-import es.upm.miw.bantumi.model.BantumiViewModel;
+import es.upm.miw.bantumi.view.BantumiViewModel;
 
 public class JuegoBantumi {
 

@@ -25,7 +25,7 @@ import es.upm.miw.bantumi.dialog.BuildMatchDialog;
 import es.upm.miw.bantumi.dialog.FinalAlertDialog;
 import es.upm.miw.bantumi.dialog.RestartDialog;
 import es.upm.miw.bantumi.dialog.SaveMatchDialog;
-import es.upm.miw.bantumi.model.BantumiViewModel;
+import es.upm.miw.bantumi.view.BantumiViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
