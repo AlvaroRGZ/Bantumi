@@ -1,6 +1,10 @@
 package es.upm.miw.bantumi;
 
+import android.content.Context;
 import android.util.Log;
+
+import java.io.FileOutputStream;
+import java.util.List;
 
 import es.upm.miw.bantumi.model.BantumiViewModel;
 
@@ -107,7 +111,7 @@ public class JuegoBantumi {
         // Si acaba en hueco vacío en propio campo -> recoger propio + contrario
         if (getSemillas(nextPos) == 1
                 && ((turnoActual() == Turno.turnoJ1 && nextPos < 6)
-                    || (turnoActual() == Turno.turnoJ2 && nextPos > 6 && nextPos < 13))
+                || (turnoActual() == Turno.turnoJ2 && nextPos > 6 && nextPos < 13))
         ) {
             int posContrario = 12 - nextPos;
             Log.i("MiW", "\trecoger: turno=" + turnoActual() + ", pos=" + nextPos + ", contrario=" + posContrario);
@@ -192,8 +196,12 @@ public class JuegoBantumi {
      * @return juego serializado
      */
     public String serializa() {
-        // @TODO
-        return null;
+        String serializedData = "";
+        for (int i = 0; i < NUM_POSICIONES; i++) {
+            serializedData += this.bantumiVM.getNumSemillas(i).getValue().toString() + "\n";
+        }
+        serializedData += this.bantumiVM.getTurno().getValue().toString() + "\n";
+        return serializedData;
     }
 
     /**
@@ -202,6 +210,10 @@ public class JuegoBantumi {
      * @param juegoSerializado cadena que representa el estado completo del juego
      */
     public void deserializa(String juegoSerializado) {
-        // @TODO
+        String[] data = juegoSerializado.split(";");
+        for (int i = 0; i < NUM_POSICIONES; i++) {
+            this.bantumiVM.setNumSemillas(i, Integer.parseInt(data[i]));
+        }
+        this.bantumiVM.setTurno(Turno.values()[Integer.parseInt(data[data.length - 2])]);
     }
 }

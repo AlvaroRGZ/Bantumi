@@ -1,6 +1,7 @@
 package es.upm.miw.bantumi;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,16 +16,25 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.util.Locale;
 
+import es.upm.miw.bantumi.dialog.BuildMatchDialog;
+import es.upm.miw.bantumi.dialog.FinalAlertDialog;
+import es.upm.miw.bantumi.dialog.RestartDialog;
+import es.upm.miw.bantumi.dialog.SaveMatchDialog;
 import es.upm.miw.bantumi.model.BantumiViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
     protected final String LOG_TAG = "MiW";
-    JuegoBantumi juegoBantumi;
-    BantumiViewModel bantumiVM;
+    public JuegoBantumi juegoBantumi;
+    public BantumiViewModel bantumiVM;
     int numInicialSemillas;
+
+    private final String NOMBRE_FICHERO = "saved_match";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,8 +136,20 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton(android.R.string.ok, null)
                         .show();
                 return true;
+            case R.id.opcReiniciarPartida:
+                new RestartDialog()
+                        .show(getSupportFragmentManager(), "ALERT_DIALOG");
+                return true;
 
-            // @TODO!!! resto opciones
+            case R.id.opcGuardarPartida:
+                new SaveMatchDialog()
+                        .show(getSupportFragmentManager(), "ALERT_DIALOG");
+                return true;
+
+            case R.id.opcRecuperarPartida:
+                new BuildMatchDialog()
+                        .show(getSupportFragmentManager(), "ALERT_DIALOG");
+                return true;
 
             default:
                 Snackbar.make(
@@ -190,15 +212,50 @@ public class MainActivity extends AppCompatActivity {
             texto = "¡¡¡ EMPATE !!!";
         }
         Snackbar.make(
-                findViewById(android.R.id.content),
-                texto,
-                Snackbar.LENGTH_LONG
-        )
-        .show();
+                        findViewById(android.R.id.content),
+                        texto,
+                        Snackbar.LENGTH_LONG
+                )
+                .show();
 
         // @TODO guardar puntuación
 
         // terminar
         new FinalAlertDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
+    }
+
+    private String obtenerNombreDeArchivo() {
+        return NOMBRE_FICHERO;
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    public void saveGame() {
+        try {
+            FileOutputStream fos = openFileOutput(obtenerNombreDeArchivo(), Context.MODE_PRIVATE);
+            fos.write((this.juegoBantumi.serializa()).getBytes());
+            fos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void rebuildGame() {
+        String readedData = "";
+        try {
+            BufferedReader fin = new BufferedReader(new InputStreamReader(openFileInput(obtenerNombreDeArchivo())));
+            String linea = fin.readLine();
+            while (linea != null) {
+                readedData += linea + ";";
+                linea = fin.readLine();
+            }
+            fin.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        this.juegoBantumi.deserializa(readedData);
     }
 }
