@@ -45,4 +45,70 @@ public class Score {
         this.mScore2 = score2;
         this.mWin = win;
     }
+
+    @NonNull
+    public String getmDate() {
+        return mDate;
+    }
+
+    public void setmDate(@NonNull String mDate) {
+        this.mDate = mDate;
+    }
+
+    @NonNull
+    public String getmPlayer1() {
+        return mPlayer1;
+    }
+
+    public void setmPlayer1(@NonNull String mPlayer1) {
+        this.mPlayer1 = mPlayer1;
+    }
+
+    @NonNull
+    public Integer getmScore1() {
+        return mScore1;
+    }
+
+    public void setmScore1(@NonNull Integer mScore1) {
+        this.mScore1 = mScore1;
+    }
+
+    @NonNull
+    public String getmPlayer2() {
+        return mPlayer2;
+    }
+
+    public void setmPlayer2(@NonNull String mPlayer2) {
+        this.mPlayer2 = mPlayer2;
+    }
+
+    @NonNull
+    public Integer getmScore2() {
+        return mScore2;
+    }
+
+    public void setmScore2(@NonNull Integer mScore2) {
+        this.mScore2 = mScore2;
+    }
+
+    @NonNull
+    public Boolean getmWin() {
+        return mWin;
+    }
+
+    public void setmWin(@NonNull Boolean mWin) {
+        this.mWin = mWin;
+    }
+
+    @Override
+    public String toString() {
+        return "Score{" +
+                "mDate='" + mDate + '\'' +
+                ", mPlayer1='" + mPlayer1 + '\'' +
+                ", mScore1=" + mScore1 +
+                ", mPlayer2='" + mPlayer2 + '\'' +
+                ", mScore2=" + mScore2 +
+                ", mWin=" + mWin +
+                '}';
+    }
 }
