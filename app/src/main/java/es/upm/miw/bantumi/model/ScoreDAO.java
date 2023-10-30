@@ -11,7 +11,7 @@ import java.util.List;
 @Dao
 public interface ScoreDAO {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(Score word);
+    void insert(Score score);
 
     @Query("DELETE FROM score_table")
     void deleteAll();

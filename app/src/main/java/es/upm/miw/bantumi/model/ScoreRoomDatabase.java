@@ -8,12 +8,14 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Database(entities = {Score.class}, version = 1, exportSchema = false)
 public abstract class ScoreRoomDatabase extends RoomDatabase {
-    public static final String DATABASE_NAME  = "Score_database";
+    public static final String DATABASE_NAME  = "score_database";
 
     public abstract ScoreDAO ScoreDao();
 
@@ -43,15 +45,16 @@ public abstract class ScoreRoomDatabase extends RoomDatabase {
 
             // If you want to keep data through app restarts,
             // comment out the following block
-            databaseWriteExecutor.execute(() -> {
-                // Populate the database in the background.
-                // If you want to start with more Scores, just add them.
-                ScoreDAO dao = INSTANCE.ScoreDao();
-                dao.deleteAll();
+            //databaseWriteExecutor.execute(() -> {
+            //    // Populate the database in the background.
+            //    // If you want to start with more Scores, just add them.
+            //    ScoreDAO dao = INSTANCE.ScoreDao();
+            //    dao.deleteAll();
 
-                Score Score = new Score("p1", 20, "p2", 10, true);
-                dao.insert(Score);
-            });
+            //    String date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).toString();
+            //    Score Score = new Score(date, "p1", 20, "p2", 10, true);
+            //    dao.insert(Score);
+            //});
         }
     };
 }

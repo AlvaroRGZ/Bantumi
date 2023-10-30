@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
+import java.util.Objects;
 
 @Entity(tableName = "score_table")
 public class Score {
@@ -35,10 +36,11 @@ public class Score {
     @ColumnInfo(name = "win")
     private Boolean mWin;
 
-    public Score(@NonNull String player1, @NonNull Integer score1,
+    public Score(@NonNull String date,
+                @NonNull String player1, @NonNull Integer score1,
                  @NonNull String player2, @NonNull Integer score2,
                  @NonNull Boolean win) {
-        this.mDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).toString();
+        this.mDate = date;
         this.mPlayer1 = player1;
         this.mScore1 = score1;
         this.mPlayer2 = player2;
@@ -47,56 +49,56 @@ public class Score {
     }
 
     @NonNull
-    public String getmDate() {
+    public String getMDate() {
         return mDate;
     }
 
-    public void setmDate(@NonNull String mDate) {
+    public void setMDate(@NonNull String mDate) {
         this.mDate = mDate;
     }
 
     @NonNull
-    public String getmPlayer1() {
+    public String getMPlayer1() {
         return mPlayer1;
     }
 
-    public void setmPlayer1(@NonNull String mPlayer1) {
+    public void setMPlayer1(@NonNull String mPlayer1) {
         this.mPlayer1 = mPlayer1;
     }
 
     @NonNull
-    public Integer getmScore1() {
+    public Integer getMScore1() {
         return mScore1;
     }
 
-    public void setmScore1(@NonNull Integer mScore1) {
+    public void setMScore1(@NonNull Integer mScore1) {
         this.mScore1 = mScore1;
     }
 
     @NonNull
-    public String getmPlayer2() {
+    public String getMPlayer2() {
         return mPlayer2;
     }
 
-    public void setmPlayer2(@NonNull String mPlayer2) {
+    public void setMPlayer2(@NonNull String mPlayer2) {
         this.mPlayer2 = mPlayer2;
     }
 
     @NonNull
-    public Integer getmScore2() {
+    public Integer getMScore2() {
         return mScore2;
     }
 
-    public void setmScore2(@NonNull Integer mScore2) {
+    public void setMScore2(@NonNull Integer mScore2) {
         this.mScore2 = mScore2;
     }
 
     @NonNull
-    public Boolean getmWin() {
+    public Boolean getMWin() {
         return mWin;
     }
 
-    public void setmWin(@NonNull Boolean mWin) {
+    public void setMWin(@NonNull Boolean mWin) {
         this.mWin = mWin;
     }
 
@@ -110,5 +112,18 @@ public class Score {
                 ", mScore2=" + mScore2 +
                 ", mWin=" + mWin +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Score score = (Score) o;
+        return mDate.equals(score.mDate) && mPlayer1.equals(score.mPlayer1) && mScore1.equals(score.mScore1) && mPlayer2.equals(score.mPlayer2) && mScore2.equals(score.mScore2) && mWin.equals(score.mWin);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mDate, mPlayer1, mScore1, mPlayer2, mScore2, mWin);
     }
 }

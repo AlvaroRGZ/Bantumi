@@ -2,6 +2,7 @@ package es.upm.miw.bantumi;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -19,13 +20,17 @@ import com.google.android.material.snackbar.Snackbar;
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import es.upm.miw.bantumi.dialog.BuildMatchDialog;
 import es.upm.miw.bantumi.dialog.FinalAlertDialog;
 import es.upm.miw.bantumi.dialog.RestartDialog;
 import es.upm.miw.bantumi.dialog.SaveMatchDialog;
+import es.upm.miw.bantumi.model.Score;
 import es.upm.miw.bantumi.view.BantumiViewModel;
+import es.upm.miw.bantumi.view.ScoreViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -151,6 +156,10 @@ public class MainActivity extends AppCompatActivity {
                         .show(getSupportFragmentManager(), "ALERT_DIALOG");
                 return true;
 
+            case R.id.opcMejoresResultados:
+                startActivity(new Intent(MainActivity.this, ScoreActivity.class));
+                return true;
+
             default:
                 Snackbar.make(
                         findViewById(android.R.id.content),
@@ -218,7 +227,19 @@ public class MainActivity extends AppCompatActivity {
                 )
                 .show();
 
-        // @TODO guardar puntuación
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
+
+        Score score = new Score(
+                        sdf.format(new Date()),
+                "pepe", this.juegoBantumi.getDeposito1(),
+                "Jose", this.juegoBantumi.getDeposito2(),
+                juegoBantumi.getSemillas(6) > 6 * numInicialSemillas);
+        try {
+            new ViewModelProvider(this).get(ScoreViewModel.class).insert(score);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         // terminar
         new FinalAlertDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");

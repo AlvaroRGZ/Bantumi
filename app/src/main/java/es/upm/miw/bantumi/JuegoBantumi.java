@@ -46,6 +46,14 @@ public class JuegoBantumi {
         return bantumiVM.getNumSemillas(pos).getValue();
     }
 
+    public int getDeposito1() {
+        return bantumiVM.getNumSemillas(6).getValue();
+    }
+
+    public int getDeposito2() {
+        return bantumiVM.getNumSemillas(13).getValue();
+    }
+
     /**
      * Asigna el número de semillas a una posición
      *

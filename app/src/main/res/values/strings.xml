@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Bantumi</string>
 
-    <string name="txtPlayer1">Jugador 1</string>
+    <string name="txtPlayer1">BBBBBBBBbAAAA</string>
     <string name="txtPlayer2">Jugador 2</string>
     <string name="txtBtnReset">Reset</string>
 
@@ -54,5 +54,9 @@
     <!-- Diálogo Guardar Partida -->
     <string name="txtDialogoGuardarTitulo">Guardar partida</string>
     <string name="txtDialogoGuardarPregunta">¿Estás seguro?</string>
+
+    <!-- Layout Scores -->
+    <string name="cdBotonBorrar">Borrar registros</string>
+    <string name="txtPuntuaciones">Puntuaciones</string>
 
 </resources>
