@@ -54,7 +54,9 @@ public class MainActivity extends AppCompatActivity {
         numInicialSemillas = getResources().getInteger(R.integer.intNumInicialSemillas);
         bantumiVM = new ViewModelProvider(this).get(BantumiViewModel.class);
         juegoBantumi = new JuegoBantumi(bantumiVM, JuegoBantumi.Turno.turnoJ1, numInicialSemillas);
+
         this.sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
         crearObservadores();
     }
 
@@ -162,17 +164,17 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.opcReiniciarPartida:
                 new RestartDialog()
-                        .show(getSupportFragmentManager(), "ALERT_DIALOG");
+                        .show(getSupportFragmentManager(), "REINICIAR_DIALOG");
                 return true;
 
             case R.id.opcGuardarPartida:
                 new SaveMatchDialog()
-                        .show(getSupportFragmentManager(), "ALERT_DIALOG");
+                        .show(getSupportFragmentManager(), "GUARDAR_DIALOG");
                 return true;
 
             case R.id.opcRecuperarPartida:
                 new BuildMatchDialog()
-                        .show(getSupportFragmentManager(), "ALERT_DIALOG");
+                        .show(getSupportFragmentManager(), "RECUPERAR_DIALOG");
                 return true;
 
             case R.id.opcMejoresResultados:
