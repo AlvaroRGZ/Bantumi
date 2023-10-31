@@ -30,4 +30,10 @@ public class ScoreRepository {
             mScoreDao.insert(score);
         });
     }
+
+    public void deleteAll() {
+        ScoreRoomDatabase.databaseWriteExecutor.execute(() -> {
+            mScoreDao.deleteAll();
+        });
+    }
 }

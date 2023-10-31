@@ -121,9 +121,4 @@ public class Score {
         Score score = (Score) o;
         return mDate.equals(score.mDate) && mPlayer1.equals(score.mPlayer1) && mScore1.equals(score.mScore1) && mPlayer2.equals(score.mPlayer2) && mScore2.equals(score.mScore2) && mWin.equals(score.mWin);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(mDate, mPlayer1, mScore1, mPlayer2, mScore2, mWin);
-    }
 }

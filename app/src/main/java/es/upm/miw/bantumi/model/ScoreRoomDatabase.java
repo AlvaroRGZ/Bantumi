@@ -42,19 +42,6 @@ public abstract class ScoreRoomDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-
-            // If you want to keep data through app restarts,
-            // comment out the following block
-            //databaseWriteExecutor.execute(() -> {
-            //    // Populate the database in the background.
-            //    // If you want to start with more Scores, just add them.
-            //    ScoreDAO dao = INSTANCE.ScoreDao();
-            //    dao.deleteAll();
-
-            //    String date = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault()).toString();
-            //    Score Score = new Score(date, "p1", 20, "p2", 10, true);
-            //    dao.insert(Score);
-            //});
         }
     };
 }

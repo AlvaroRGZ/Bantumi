@@ -21,8 +21,8 @@ public class ScoreListAdapter extends ListAdapter<Score, ScoreViewHolder> {
 
     @Override
     public void onBindViewHolder(ScoreViewHolder holder, int position) {
-        Score current = getItem(position);
-        holder.bind(current.toString());
+        Score score = getItem(position);
+        holder.bind(score);
     }
 
     public static class ScoreDiff extends DiffUtil.ItemCallback<Score> {
@@ -34,7 +34,7 @@ public class ScoreListAdapter extends ListAdapter<Score, ScoreViewHolder> {
 
         @Override
         public boolean areContentsTheSame(@NonNull Score oldItem, @NonNull Score newItem) {
-            return false;
+            return oldItem.equals(newItem);
         }
     }
 }
