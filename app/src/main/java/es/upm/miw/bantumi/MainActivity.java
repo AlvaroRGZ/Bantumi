@@ -3,6 +3,7 @@ package es.upm.miw.bantumi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.preference.PreferenceManager;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -34,10 +36,12 @@ import es.upm.miw.bantumi.view.ScoreViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    protected final String LOG_TAG = "MiW";
+    public static final String LOG_TAG = "MiW";
     public JuegoBantumi juegoBantumi;
     public BantumiViewModel bantumiVM;
     int numInicialSemillas;
+
+    private SharedPreferences sharedPref;
 
     private final String NOMBRE_FICHERO = "saved_match";
 
@@ -50,7 +54,22 @@ public class MainActivity extends AppCompatActivity {
         numInicialSemillas = getResources().getInteger(R.integer.intNumInicialSemillas);
         bantumiVM = new ViewModelProvider(this).get(BantumiViewModel.class);
         juegoBantumi = new JuegoBantumi(bantumiVM, JuegoBantumi.Turno.turnoJ1, numInicialSemillas);
+        this.sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         crearObservadores();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        this.sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+
+        TextView tvJugador1 = findViewById(R.id.tvPlayer1);
+        tvJugador1.setText(this.sharedPref.getString("nombreJugador1", "Jugador 1"));
+
+        TextView tvJugador2 = findViewById(R.id.tvPlayer2);
+        tvJugador2.setText(this.sharedPref.getString("nombreJugador2", "Jugador 2"));
     }
 
     /**
@@ -131,9 +150,9 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-//            case R.id.opcAjustes: // @todo Preferencias
-//                startActivity(new Intent(this, BantumiPrefs.class));
-//                return true;
+            case R.id.opcAjustes:
+                startActivity(new Intent(this, BantumiPrefs.class));
+                return true;
             case R.id.opcAcercaDe:
                 new AlertDialog.Builder(this)
                         .setTitle(R.string.aboutTitle)
@@ -214,9 +233,11 @@ public class MainActivity extends AppCompatActivity {
      * El juego ha terminado. Volver a jugar?
      */
     private void finJuego() {
+
+        this.sharedPref.getString("NombreJugador1", "Jugador 1");
         String texto = (juegoBantumi.getSemillas(6) > 6 * numInicialSemillas)
-                ? "Gana Jugador 1"
-                : "Gana Jugador 2";
+                ? "Gana " + this.sharedPref.getString("nombreJugador1", "Jugador 1")
+                : "Gana " + this.sharedPref.getString("nombreJugador2", "Jugador 2");
         if (juegoBantumi.getSemillas(6) == 6 * numInicialSemillas) {
             texto = "¡¡¡ EMPATE !!!";
         }
@@ -231,9 +252,9 @@ public class MainActivity extends AppCompatActivity {
 
         Score score = new Score(
                         sdf.format(new Date()),
-                "pepe", this.juegoBantumi.getDeposito1(),
-                "Jose", this.juegoBantumi.getDeposito2(),
-                juegoBantumi.getSemillas(6) > 6 * numInicialSemillas);
+                        this.sharedPref.getString("nombreJugador1", "Jugador 1"), this.juegoBantumi.getDeposito1(),
+                        this.sharedPref.getString("nombreJugador2", "Jugador 2"), this.juegoBantumi.getDeposito2(),
+                    juegoBantumi.getSemillas(6) > 6 * numInicialSemillas);
         try {
             new ViewModelProvider(this).get(ScoreViewModel.class).insert(score);
         } catch (Exception e) {

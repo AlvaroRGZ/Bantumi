@@ -204,7 +204,7 @@ public class JuegoBantumi {
         for (int i = 0; i < NUM_POSICIONES; i++) {
             serializedData += this.bantumiVM.getNumSemillas(i).getValue().toString() + "\n";
         }
-        serializedData += this.bantumiVM.getTurno().getValue().toString() + "\n";
+        serializedData += this.bantumiVM.getTurno().getValue() + "\n";
         return serializedData;
     }
 
@@ -218,6 +218,16 @@ public class JuegoBantumi {
         for (int i = 0; i < NUM_POSICIONES; i++) {
             this.bantumiVM.setNumSemillas(i, Integer.parseInt(data[i]));
         }
-        this.bantumiVM.setTurno(Turno.values()[Integer.parseInt(data[data.length - 2])]);
+        this.bantumiVM.setTurno(getTurnoPorNombre(data[data.length - 1]));
+    }
+
+    public Turno getTurnoPorNombre(String name) {
+        for (Turno turno : Turno.values()) {
+            if (turno.name().equals(name)) {
+                return turno;
+            }
+        }
+        // Para el compilador, siempre se va a encontrar.
+        return null;
     }
 }
