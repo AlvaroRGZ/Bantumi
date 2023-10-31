@@ -2,6 +2,8 @@ package es.upm.miw.bantumi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import es.upm.miw.bantumi.dialog.DeleteScoresDialog;
 import es.upm.miw.bantumi.view.ScoreListAdapter;
 import es.upm.miw.bantumi.view.ScoreViewModel;
 
@@ -26,14 +29,29 @@ public class ScoreActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Use ViewModelProvider to associate your ViewModel with your Activity
         mScoreViewModel = new ViewModelProvider(this).get(ScoreViewModel.class);
-
-        // add an observer for the LiveDatas
         mScoreViewModel.getAllScores().observe(this, scores -> {
-            // Update the cached copy of the scores in the adapter.
             adapter.submitList(scores);
+        });
+
+        Button borrar = findViewById(R.id.btnBorrar);
+        borrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DeleteScoresDialog().show(getSupportFragmentManager(), "ALERT_DIALOG");
+            }
+        });
+
+        Button atras = findViewById(R.id.btnAtras);
+        atras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
         });
     }
 
+    public void deleteAllScores() {
+        new ViewModelProvider(this).get(ScoreViewModel.class).deleteAll();
+    }
 }

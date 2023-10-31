@@ -55,6 +55,10 @@
     <string name="txtDialogoGuardarTitulo">Guardar partida</string>
     <string name="txtDialogoGuardarPregunta">¿Estás seguro?</string>
 
+    <!-- Diálogo Borrar bbdd -->
+    <string name="txtDialogoBorrarTitulo">Borrar puntuaciones</string>
+    <string name="txtDialogoBorrarPregunta">¿Estás seguro?</string>
+
     <!-- Layout Scores -->
     <string name="cdBotonBorrar">Borrar registros</string>
     <string name="txtPuntuaciones">Puntuaciones</string>
