@@ -26,20 +26,12 @@ public class RestartDialog extends DialogFragment {
                 .setMessage(R.string.txtDialogoReiniciarPregunta)
                 .setPositiveButton(
                         getString(android.R.string.ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                main.juegoBantumi.inicializar(JuegoBantumi.Turno.turnoJ1);
-                            }
-                        }
+                        (dialog, which) -> main.juegoBantumi.inicializar(JuegoBantumi.Turno.turnoJ1)
                 )
                 .setNegativeButton(
                         getString(android.R.string.cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Does nothing, keeps playing
-                            }
+                        (dialog, which) -> {
+                            // Does nothing, keeps playing
                         }
                 );
 

@@ -46,16 +46,17 @@ public class MainActivity extends AppCompatActivity {
     private final String NOMBRE_FICHERO = "saved_match";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        this.sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
         // Instancia el ViewModel y el juego, y asigna observadores a los huecos
+        //numInicialSemillas = Integer.parseInt(this.sharedPref.getString("numeroSemillasIniciales", "9"));
         numInicialSemillas = getResources().getInteger(R.integer.intNumInicialSemillas);
         bantumiVM = new ViewModelProvider(this).get(BantumiViewModel.class);
         juegoBantumi = new JuegoBantumi(bantumiVM, JuegoBantumi.Turno.turnoJ1, numInicialSemillas);
-
-        this.sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
         crearObservadores();
     }

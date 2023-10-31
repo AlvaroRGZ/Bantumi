@@ -6,11 +6,21 @@
         <EditTextPreference
             app:key="nombreJugador1"
             app:title="@string/txtNombreJugador1"
+            app:defaultValue="Jugador 1"
             app:useSimpleSummaryProvider="true" />
 
         <EditTextPreference
             app:key="nombreJugador2"
             app:title="@string/txtNombreJugador2"
+            app:defaultValue="Jugador 2"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/prefTituloJuego">
+        <EditTextPreference
+            app:key="numeroSemillasIniciales"
+            app:title="@string/txtNumeroSemillasIniciales"
+            app:defaultValue="4"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 

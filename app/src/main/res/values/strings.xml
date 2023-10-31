@@ -67,5 +67,7 @@
     <string name="prefTituloJugadores">Apariencia jugadores</string>
         <string name="txtNombreJugador1">Nombre del primer jugador</string>
         <string name="txtNombreJugador2">Nombre del primer jugador</string>
+    <string name="prefTituloJuego">Parámetros del juego</string>
+        <string name="txtNumeroSemillasIniciales">Número de semillas iniciales</string>
 
 </resources>

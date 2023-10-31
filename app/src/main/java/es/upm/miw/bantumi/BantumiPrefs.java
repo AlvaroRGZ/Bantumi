@@ -1,5 +1,6 @@
 package es.upm.miw.bantumi;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -7,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+
+import java.util.Objects;
 
 public class BantumiPrefs  extends AppCompatActivity {
 
@@ -36,6 +39,16 @@ public class BantumiPrefs  extends AppCompatActivity {
             );
 
             findPreference("nombreJugador2").setOnPreferenceChangeListener(
+                    (Preference.OnPreferenceChangeListener) (preference, newValue) -> {
+                        Log.i(
+                                MainActivity.LOG_TAG,
+                                "onCreatePreferences(): " + preference + " = " + newValue
+                        );
+                        return true;
+                    }
+            );
+
+            findPreference("numeroSemillasIniciales").setOnPreferenceChangeListener(
                     (Preference.OnPreferenceChangeListener) (preference, newValue) -> {
                         Log.i(
                                 MainActivity.LOG_TAG,

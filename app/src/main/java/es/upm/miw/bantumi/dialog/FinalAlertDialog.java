@@ -26,21 +26,11 @@ public class FinalAlertDialog extends DialogFragment {
                 .setMessage(R.string.txtDialogoFinalPregunta)
                 .setPositiveButton(
                         getString(android.R.string.ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                main.juegoBantumi.inicializar(JuegoBantumi.Turno.turnoJ1);
-                            }
-                        }
+                        (dialog, which) -> main.juegoBantumi.inicializar(JuegoBantumi.Turno.turnoJ1)
                 )
                 .setNegativeButton(
                         getString(android.R.string.cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                main.finish();
-                            }
-                        }
+                        (dialog, which) -> main.finish()
                 );
 
 		return builder.create();

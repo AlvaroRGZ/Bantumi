@@ -26,20 +26,12 @@ public class SaveMatchDialog extends DialogFragment {
                 .setMessage(R.string.txtDialogoGuardarPregunta)
                 .setPositiveButton(
                         getString(android.R.string.ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                main.saveGame();
-                            }
-                        }
+                        (dialog, which) -> main.saveGame()
                 )
                 .setNegativeButton(
                         getString(android.R.string.cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Does nothing, keeps playing
-                            }
+                        (dialog, which) -> {
+                            // Does nothing, keeps playing
                         }
                 );
 

@@ -25,20 +25,12 @@ public class BuildMatchDialog extends DialogFragment {
                 .setMessage(R.string.txtDialogoGuardarPregunta)
                 .setPositiveButton(
                         getString(android.R.string.ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                main.rebuildGame();
-                            }
-                        }
+                        (dialog, which) -> main.rebuildGame()
                 )
                 .setNegativeButton(
                         getString(android.R.string.cancel),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                // Does nothing, keeps playing
-                            }
+                        (dialog, which) -> {
+                            // Does nothing, keeps playing
                         }
                 );
 
